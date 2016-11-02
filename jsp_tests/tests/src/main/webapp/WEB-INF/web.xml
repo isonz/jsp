@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  <display-name>JSP 留言板</display-name>
+  
+  <jsp-config> <!-- 解决头部使用JSP标签产生空行问题 -->
+	<jsp-property-group>
+		<url-pattern>*.jsp</url-pattern>
+		<trim-directive-whitespaces>true</trim-directive-whitespaces>
+	</jsp-property-group>
+  </jsp-config>
+  
+  <welcome-file-list> <!-- 文件索引 -->
+	<welcome-file>index.html</welcome-file>
+	<welcome-file>index.htm</welcome-file>
+	<welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+	<!-- Native JSP -->
+	  <servlet>
+	  	<description>Message add</description>
+	    <display-name>add message</display-name>
+	    <servlet-name>nativesAddMessage</servlet-name>
+	    <servlet-class>cn.ptp.natives.controller.AddMessage</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	    <servlet-name>nativesAddMessage</servlet-name>
+	    <url-pattern>/natives/addMessage</url-pattern>
+	  </servlet-mapping>
+	  
+	  <servlet>
+	  	<description>Message delete</description>
+	    <display-name>delete message</display-name>
+	    <servlet-name>nativesDelMessage</servlet-name>
+	    <servlet-class>cn.ptp.natives.controller.DelMessage</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	    <servlet-name>nativesDelMessage</servlet-name>
+	    <url-pattern>/natives/delMessage</url-pattern>
+	  </servlet-mapping>
+	  
+	  <servlet>
+	  	<description>Message edit</description>
+	    <display-name>edit message</display-name>
+	    <servlet-name>nativesEditMessage</servlet-name>
+	    <servlet-class>cn.ptp.natives.controller.EditMessage</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	    <servlet-name>nativesEditMessage</servlet-name>
+	    <url-pattern>/natives/editMessage</url-pattern>
+	  </servlet-mapping>
+	<!-- Native JSP END -->
+	
+	<!-- Hibernate JSP -->
+	  <servlet>
+	    <servlet-name>hibernateAddMessage</servlet-name>
+	    <servlet-class>cn.ptp.hibernate.controller.AddMessage</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	    <servlet-name>hibernateAddMessage</servlet-name>
+	    <url-pattern>/hibernate/addMessage</url-pattern>
+	  </servlet-mapping>
+	  
+	  <servlet>
+	    <servlet-name>hibernateDelMessage</servlet-name>
+	    <servlet-class>cn.ptp.hibernate.controller.DelMessage</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	    <servlet-name>hibernateDelMessage</servlet-name>
+	    <url-pattern>/hibernate/delMessage</url-pattern>
+	  </servlet-mapping>
+	  
+	  <servlet>
+	    <servlet-name>hibernateEditMessage</servlet-name>
+	    <servlet-class>cn.ptp.hibernate.controller.EditMessage</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	    <servlet-name>hibernateEditMessage</servlet-name>
+	    <url-pattern>/hibernate/editMessage</url-pattern>
+	  </servlet-mapping>
+	<!-- Hibernate JSP END -->
+	
+	<!-- Spring -->
+
+	<!-- Spring end -->
+	
+	<!-- Spring MVC -->
+	<servlet>  
+    	<servlet-name>springMVC</servlet-name>  
+    	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>  
+        <!-- 可以自定义servlet.xml配置文件的位置和名称，默认为WEB-INF目录下，名称为[<servlet-name>]-servlet.xml，如spring-servlet.xml-->  
+  		<init-param>  
+        	<param-name>contextConfigLocation</param-name>  
+        	<param-value>classpath*:spring-servlet.xml</param-value>  
+        </init-param>  
+      	<load-on-startup>1</load-on-startup>  
+  	</servlet>  
+  	<servlet-mapping>  
+  		<servlet-name>springMVC</servlet-name>  
+  		<url-pattern>/</url-pattern>  
+  	</servlet-mapping>  
+	<!-- Spring MVC end -->
+	
+</web-app>
+

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  <display-name>JSP 留言板</display-name>
+  
+  <jsp-config> <!-- 解决头部使用JSP标签产生空行问题 -->
+	<jsp-property-group>
+		<url-pattern>*.jsp</url-pattern>
+		<trim-directive-whitespaces>true</trim-directive-whitespaces>
+	</jsp-property-group>
+  </jsp-config>
+  
+  <welcome-file-list> <!-- 文件索引 -->
+	<welcome-file>index.html</welcome-file>
+	<welcome-file>index.htm</welcome-file>
+	<welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <session-config>
+  	<session-timeout>1200</session-timeout>
+  </session-config>
+  <mime-mapping>
+  	<extension>zip</extension>
+    <mime-type>application/zip</mime-type>
+  </mime-mapping>
+  
+  <context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:applicationContext.xml</param-value>
+	</context-param>
+	
+	<listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+  
+  <filter><!-- 解决中文乱码 -->
+  	<filter-name>characterEncodingFilter</filter-name>  
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
+    <init-param>  
+    	<param-name>encoding</param-name>  
+        <param-value>UTF-8</param-value>  
+    </init-param>  
+    <init-param>  
+        <param-name>forceEncoding</param-name>  
+        <param-value>true</param-value>  
+    </init-param>  
+  </filter>  
+  <filter-mapping>  
+  	<filter-name>characterEncodingFilter</filter-name>  
+    <url-pattern>/*</url-pattern>  
+  </filter-mapping>  
+  
+  <!-- Spring 刷新Introspector防止内存泄露-->
+	<!-- <listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener> -->
+	<!-- 作业监听器 -->
+	<!-- <listener>
+   		<listener-class>cn.ptp.listener.WebJobListener</listener-class>
+   		<listener-class>cn.ptp.listener.DataSourceListener</listener-class>    
+ 	</listener> -->
+ 	
+  <!-- Spring MVC -->
+	<servlet>  
+    	<servlet-name>springMVC</servlet-name>  
+    	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>  
+        <!-- 可以自定义servlet.xml配置文件的位置和名称，默认为WEB-INF目录下，名称为[<servlet-name>]-servlet.xml，如spring-servlet.xml-->  
+  		<init-param>  
+        	<param-name>contextConfigLocation</param-name>  
+        	<param-value>classpath*:spring-servlet.xml</param-value>  
+        </init-param>  
+      	<load-on-startup>1</load-on-startup>  
+  	</servlet>  
+  	<servlet-mapping>  
+  		<servlet-name>springMVC</servlet-name>  
+  		<url-pattern>/</url-pattern>  
+  	</servlet-mapping>  
+	<!-- Spring MVC end -->
+  
+</web-app>
